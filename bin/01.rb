@@ -5,7 +5,7 @@ require_relative '../lib/crm_data'
 
 
 crm = CrmData.new(CRM)
-crm.company_employees
+pp crm.company_employees
 
 
 require 'rspec/autorun'
@@ -49,7 +49,6 @@ RSpec.describe '#company_employees' do
     ]
 
     crm = CrmData.new(input)
-
     expect(crm.company_employees).to eq(expected)
   end
 end

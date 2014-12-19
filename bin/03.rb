@@ -1,5 +1,5 @@
 require 'pp'
-require '../data/crm'
+require_relative '../data/crm'
 
 def unemployed(input)
   result = []

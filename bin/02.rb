@@ -1,21 +1,11 @@
 require 'pp'
-require '../data/crm'
+require_relative '../data/crm'
 
 def all_employments(input)
   result = []
+  employments = {}
   input[:people].each do |person|
-    employments = {
-      :person_id => person[:id],
-      :person_first_name => person[:first_name],
-      :person_last_name => person[:last_name],
-    }
     person[:employments].each do |employment|
-      employments = {
-        :person_id => person[:id],
-        :person_first_name => person[:first_name],
-        :person_last_name => person[:last_name],
-        :title => employment[:title]
-      }
       input[:companies].each do |company|
         if employment[:company_id] == company[:id]
           employments = {
