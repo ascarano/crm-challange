@@ -1,22 +1,11 @@
 require 'pp'
 require_relative '../data/crm'
+require_relative '../lib/crm_data'
 
-def unemployed(input)
-  result = []
+crm = CrmData.new(CRM)
+pp crm.company_employees
 
-  input[:people].each do |person|
-    if person[:employments] == []
-      just_people = {
-        :id => person[:id],
-        :person_first_name => person[:first_name],
-        :person_last_name => person[:last_name],
-      }
-      result << just_people
-    end
-  end
 
-  pp result
-end
 
 
 require 'rspec/autorun'
@@ -49,7 +38,8 @@ RSpec.describe '#unemployed' do
       },
     ]
 
-    expect(unemployed(input)).to eq(expected)
+    crm = CrmData.new(input)
+    expect(crm.unemployed).to eq(expected)
 
   end
 

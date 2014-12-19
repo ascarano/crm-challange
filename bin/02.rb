@@ -1,30 +1,9 @@
 require 'pp'
 require_relative '../data/crm'
+require_relative '../lib/crm_data'
 
-def all_employments(input)
-  result = []
-  employments = {}
-  input[:people].each do |person|
-    person[:employments].each do |employment|
-      input[:companies].each do |company|
-        if employment[:company_id] == company[:id]
-          employments = {
-            :company_id => company[:id],
-            :company_name => company[:name],
-            :person_id => person[:id],
-            :person_first_name => person[:first_name],
-            :person_last_name => person[:last_name],
-            :title => employment[:title]
-          }
-        end
-      end
-    end
-    result << employments
-  end
-  pp result
-end
-
-
+crm = CrmData.new(CRM)
+crm.all_employments
 
 require 'rspec/autorun'
 RSpec.describe '#all_employments' do
@@ -65,7 +44,8 @@ RSpec.describe '#all_employments' do
       },
     ]
 
-    expect(all_employments(input)).to eq(expected)
+    crm = CrmData.new(input)
+    expect(crm.all_employments).to eq(expected)
 
   end
 
